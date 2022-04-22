@@ -1,0 +1,6 @@
+FROM debian:latest
+RUN apt-get update && apt-get install python3-pip -y  && mkdir /my_test && mkdir /my_test/log && pip3 install requests
+ADD content.py /my_test/content.py
+WORKDIR /my_test/
+EXPOSE 8000
+CMD python3 content.py

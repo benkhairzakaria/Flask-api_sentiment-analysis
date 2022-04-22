@@ -1,0 +1,6 @@
+FROM debian:latest
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests &&  pip3 install fastapi
+ADD api.py /api.py
+ADD MLSentiment.py /MLSentiment.py
+WORKDIR /
+CMD uvicorn api:app --reload

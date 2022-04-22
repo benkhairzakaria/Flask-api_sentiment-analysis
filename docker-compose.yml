@@ -1,0 +1,38 @@
+version: "2.2"
+services:
+  api:
+    image: projet2/api:1.0.0
+    container_name: fastapi
+    networks:
+      - my_test_network
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+        mode: host
+  authentification:
+    image: authentification:1.0.0
+    container_name: authentification_container
+    networks:
+      - my_test_network
+    environment:
+      ip_address: fastapi
+      LOG: 1
+    volumes:
+      - .:/my_test/log
+    depends_on:
+      - api
+  content:
+    image: content:1.0.0
+    container_name: content_container
+    networks:
+      - my_test_network
+    environment:
+      ip_address: fastapi
+      LOG: 1
+    volumes:
+      - .:/my_test/log
+    depends_on:
+      - api
+networks:
+  my_test_network:

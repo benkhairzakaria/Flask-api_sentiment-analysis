@@ -1,0 +1,6 @@
+FROM debian:latest
+RUN apt-get update && apt-get install python3-pip -y  && mkdir /my_test && mkdir /my_test/log && pip3 install requests
+ADD authentification.py /my_test/authentification.py
+WORKDIR /my_test/
+EXPOSE 8000
+CMD python3 authentification.py
